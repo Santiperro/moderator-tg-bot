@@ -4,7 +4,7 @@ from aiogram.types import Message
 from aiogram.filters import CommandStart, Command
 
 import keyboards.main_keyboard as main_kb
-from utils.message_loader import messages_loader as bot_messages
+from texts.bot_messages import *
 
 
 private_router = Router()
@@ -12,13 +12,13 @@ private_router = Router()
 
 @private_router.message(CommandStart())
 async def cmd_start(message: Message):
-    await message.reply(bot_messages["start_message"], 
+    await message.answer(START_MESSAGE, 
                         reply_markup=main_kb.main_keyboard)
     
 
 @private_router.message(Command('help'))
 async def cmd_help(message: Message):
-    await message.reply(bot_messages["help_message"])
+    await message.answer(HELP_MESSAGE)
 
 
 @private_router.message(F.text == "Add bot to group")

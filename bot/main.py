@@ -12,6 +12,9 @@ async def main():
     load_dotenv()
     
     bot_token = os.getenv("TG_BOT_TOKEN")
+    if not bot_token:
+        exit("Specify TG_BOT_TOKEN env variable")
+    
     bot = Bot(token=bot_token)
     
     dp = Dispatcher()
@@ -22,5 +25,7 @@ async def main():
     
     
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        level=logging.INFO)
     asyncio.run(main())
