@@ -4,8 +4,8 @@ import logging
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher
 
-from bot.handlers.group_handlers import group_router
-from bot.handlers.private_handlers import private_router
+from handlers.group_handlers import group_router
+from handlers.private_handlers import private_router
 
 
 async def main():
