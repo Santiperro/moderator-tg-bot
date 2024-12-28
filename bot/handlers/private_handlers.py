@@ -20,7 +20,7 @@ async def cmd_start(message: Message):
 
 @private_router.message(lambda message: message.text 
                         and (message.text.lower() == 'help' 
-                            or message.text.lower()) == '/help')
+                            or message.text.lower() == '/help'))
 async def cmd_help(message: Message):
     await message.answer(HELP_MESSAGE,
                          reply_markup=main_kb)
