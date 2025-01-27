@@ -1,12 +1,22 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from routers import chats
 import uvicorn
 
+from db import database, Base
+from routers import chats
 
-app = FastAPI(title="My FastAPI App", 
-              version="1.0.0")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    async with database.engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield
+
+
+app = FastAPI(title="My FastAPI App", version="1.0.0", lifespan=lifespan)
 
 app.include_router(chats.router)
+
 
 @app.get("/")
 async def root():
